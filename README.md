@@ -1,0 +1,979 @@
+# Project2
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.Random;
+import java.util.Scanner;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+/**
+ *
+ * @author admin
+ */
+class GetName{
+    String name;
+  String getName(){
+   name="Name:";
+   return name; 
+   }
+}
+
+//class2
+class GetPaymentMethod{
+   String method1;
+   String method2;
+  // protected int a;
+   
+    String payment1(){
+      method1=("Cash");       
+     return method1;  
+    }
+     String payment2(){
+      method2=("Credit/Debit Card");      
+     return method2;  
+    }
+    
+}
+//class3
+class TypeOfOrder{
+   String order1;
+   String order2;
+  
+    String typeoforder1(){
+      order1=("Dine In");        
+     return order1;  
+    }
+     String typeoforder2(){
+      order1=("Take Away");        
+     return order1;  
+    }
+    
+    int NoTable(){
+      Random t =new Random();
+      int a=t.nextInt(50);
+      return a;
+    }  
+      int NoOfTurn(){
+      Random y =new Random();
+      int b=y.nextInt(100);
+      return b;
+    }
+    
+}
+//class4 interface
+interface Feedback{
+   
+   public String comment1();
+   public String comment2();
+   public String comment3();
+}
+//implementing
+class comment implements Feedback {
+   String  Comment;
+   
+  
+   public String comment1(){
+      
+       Comment=("Bad");
+       return Comment;
+     }    
+    public String comment2(){
+      
+       Comment=("Good");
+       return Comment;
+     }    
+    public String comment3(){
+      
+       Comment=("Very Good");
+       return Comment;
+     }    
+    
+}
+
+abstract class Name{//abstarction 
+  
+  double priceBurger;
+  double priceNasiLemak;
+  double priceChicken;
+  double priceCola;
+  double priceSprite;
+  double totalPrice;
+ 
+  abstract void setFoodPrice(double priceBurger , double priceNasiLemak , double priceChicken ); 
+  abstract void setDrinkPrice( double priceCola, double priceSprite);
+  abstract void cardValidateMember(String input);
+  
+   
+}
+//class5
+class NameOrder extends Name{ 
+ 
+    void setFoodPrice(double priceBurger , double priceNasiLemak , double priceChicken){
+       this.priceBurger=priceBurger;
+       this.priceNasiLemak=priceNasiLemak;
+       this.priceChicken=priceChicken;
+    }
+    void setDrinkPrice(double priceCola, double priceSprite){
+       this.priceCola=priceCola;
+       this.priceSprite=priceSprite;
+    }
+    double getpriceBurger(){
+    return priceBurger;
+    }
+    double getpriceNasiLemak(){
+    return priceNasiLemak;
+    }
+    double getpriceChicken(){
+    return priceChicken;
+    }
+    double getpriceCola(){
+    return priceCola;
+    }
+    double getpriceSprite(){
+    return priceSprite;
+    }
+
+    void cardValidateMember(String input){
+    int[] creditCard = new int[input.length()];
+ 
+    for(int i=0; i< input.length() ;i++){
+     creditCard[i]=Integer.parseInt(input.substring(i, i+1));
+    }
+    for(int i =creditCard.length-2;i>=0; i=i-2){
+    int tempValue=creditCard[i];
+    tempValue=tempValue*2;
+  
+    if(tempValue>9){
+      tempValue=tempValue%10+1;
+    }
+    creditCard[i] = tempValue;
+    }
+ 
+    int total=0;
+    for(int i=0;i<creditCard.length;i++){
+    total+=creditCard[i];
+    }
+    if(total %10==0){
+    String status = "Valid";
+    JOptionPane.showMessageDialog(null,status, "Status", JOptionPane.PLAIN_MESSAGE);
+ 
+    }
+    else{
+    String status ="Invalid";
+    JOptionPane.showMessageDialog(null,status, "Status", JOptionPane.PLAIN_MESSAGE);
+    }
+  }
+
+}
+
+
+public class Order extends javax.swing.JFrame  {//inheritancre
+
+    GetName gn=new GetName();
+    GetPaymentMethod pm=new GetPaymentMethod();
+    TypeOfOrder to=new TypeOfOrder();
+    comment cm=new comment();
+    NameOrder no= new NameOrder();
+    FileWriter file;
+    BufferedReader reader;
+    BufferedWriter write;
+    
+    
+     private class TotalPrice{ //innerclass
+        int a; 
+        int b;
+        int c;
+        int d;
+        int e;
+     double geta(){
+       return a;
+    }
+      double getb(){
+       return b;
+    }
+      double getc(){
+       return c;
+    } 
+      double getd(){
+       return d;
+    } 
+      double gete(){
+       return e;
+    }
+        double getTotalPrice(){
+       
+        double totalprice=0;
+        totalprice=(no.getpriceBurger()*a)+(no.getpriceNasiLemak()*b)+(no.getpriceChicken()*c)+(no.getpriceCola()*d)+(no.getpriceSprite()*e);
+        return totalprice;
+        }
+      }
+    
+    /** Creates new form Project2 */
+    public Order() {
+        initComponents();
+    }
+
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
+      
+        no.setFoodPrice(4.50,2.50,5.00);
+        no.setDrinkPrice(2.50, 2.50);
+       
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jLabel3 = new javax.swing.JLabel("No Of Table:" +" " + to.NoTable());
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jLabel4 = new javax.swing.JLabel("Turn:" +" " + to.NoOfTurn());
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel(String.valueOf(no.getpriceBurger()));
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel(String.valueOf(no.getpriceNasiLemak()));
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel(String.valueOf(no.getpriceChicken()));
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel(String.valueOf(no.getpriceCola()));
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel(String.valueOf(no.getpriceSprite()));
+        jCheckBox1 = new javax.swing.JCheckBox(pm.payment1());
+        jLabel3.setVisible(false);
+        jLabel18 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jTextField8 = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        jTextField9 = new javax.swing.JTextField();
+        jCheckBox2 = new javax.swing.JCheckBox(pm.payment2());
+        jLabel4.setVisible(false);
+        jLabel21 = new javax.swing.JLabel();
+        jTextField10 = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jRadioButton3 = new javax.swing.JRadioButton("1");
+        jRadioButton4 = new javax.swing.JRadioButton("2");
+        jRadioButton5 = new javax.swing.JRadioButton("3");
+        jLabel23 = new javax.swing.JLabel();
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("ORDERING RECORD");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Tempus Sans ITC", 3, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel1.setText("                                           WELCOME TO ASYI RESTAURANT");
+        jLabel2.setText(gn.getName());
+        jRadioButton1.setText(to.typeoforder1());
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+                
+                
+                
+                
+            }
+        });
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        jRadioButton2.setText(to.typeoforder2());
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+               
+            
+             }
+            });
+       ButtonGroup bt=new ButtonGroup();
+       bt.add(jRadioButton2);
+       bt.add(jRadioButton1);
+       ButtonGroup bt1=new ButtonGroup();
+       bt1.add(jRadioButton3);
+       bt1.add(jRadioButton4);
+       bt1.add(jRadioButton5);
+         
+       jLabel5.setText("Menu");
+        jLabel6.setText("Price");
+        jLabel7.setText("Total");
+        jLabel8.setText("Chicken Burger");
+        jLabel10.setText("Nasi Lemak");
+        jLabel12.setText("Fried Chicken");
+        jLabel14.setText("Coca Cola");
+        jLabel16.setText("Sprite");
+
+         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setText("Total Price");
+         jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+         });
+
+        jLabel19.setText("Cash:");
+        jLabel20.setText("Balance:");
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
+
+        jLabel21.setText("Card Number:");
+        jLabel22.setText("Password:");
+        
+        jButton1.setText("OK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("CLEAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        
+       
+    
+          jTextField9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField9ActionPerformed(evt);
+            }
+        });
+          
+          jTextField10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField10ActionPerformed(evt);
+            }
+        });
+
+       jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
+        
+        
+        jLabel23.setText("Feedback:");
+       
+        
+        
+            javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel23)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jRadioButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jRadioButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jRadioButton1)
+                                            .addComponent(jLabel4)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addGap(32, 32, 32)
+                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel10)
+                                            .addComponent(jLabel12)
+                                            .addComponent(jLabel14)
+                                            .addComponent(jLabel16))
+                                        .addGap(47, 47, 47)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel17)
+                                            .addComponent(jLabel15)
+                                            .addComponent(jLabel13)
+                                            .addComponent(jLabel11)
+                                            .addComponent(jLabel9)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel18)))
+                                    .addComponent(jRadioButton2))
+                                .addGap(34, 34, 34)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField4)
+                                    .addComponent(jTextField5)
+                                    .addComponent(jTextField3))
+                                .addGap(61, 61, 61)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTextField9, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTextField10, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPasswordField1)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(386, 386, 386)
+                                        .addComponent(jButton1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton2)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jCheckBox1))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButton1)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel19))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jRadioButton2))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel10)
+                                            .addComponent(jLabel11))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel4))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(16, 16, 16)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel12)
+                                            .addComponent(jLabel13))))
+                                .addGap(29, 29, 29)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jCheckBox2))
+                                .addGap(28, 28, 28)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel21)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel20)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel18)
+                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel23))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jRadioButton4)
+                                    .addComponent(jRadioButton5))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton2)
+                                    .addComponent(jButton1)))
+                            .addComponent(jRadioButton3))
+                        .addGap(1, 1, 1))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13))
+        );
+
+        jMenu1.setText("File");
+
+        jMenuItem1.setText("Save");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Read");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+        jMenuBar1.add(jMenu1);
+        setJMenuBar(jMenuBar1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        
+        
+        jLabel19.setVisible(false);
+        jLabel20.setVisible(false);
+        jLabel21.setVisible(false);
+        jLabel22.setVisible(false);
+        
+        jTextField8.setVisible(false);
+        jTextField9.setVisible(false);
+        jTextField10.setVisible(false);
+        jPasswordField1.setVisible(false);
+        pack();
+    }// </editor-fold>                        
+  
+    
+    //read from file
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+         try{
+       File a2=new File("ASYI RESTAURANT.txt");
+       Scanner sc=new Scanner(a2);
+       
+       while(sc.hasNextLine()){
+           String txt=sc.nextLine();
+          jTextArea1.append(txt + "\n");
+       
+       }
+       sc.close();
+         
+      }
+       catch(Exception a2){
+          JOptionPane.showMessageDialog(null,a2+"Error");
+       }       
+     }
+         
+                                           
+    
+
+    //save to file
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        if(jTextField1.getText().trim().isEmpty() ||jTextField2.getText().trim().isEmpty()|| jTextField3.getText().trim().isEmpty()||jTextField4.getText().trim().isEmpty()|| jTextField5.getText().trim().isEmpty()||jTextField6.getText().trim().isEmpty()||(!jRadioButton1.isSelected() && !jRadioButton2.isSelected())||(!jCheckBox1.isSelected() && !jCheckBox2.isSelected())
+      || jTextField7.getText().trim().isEmpty()||((jTextField8.getText().trim().isEmpty() || jTextField9.getText().trim().isEmpty())&& (jTextField10.getText().trim().isEmpty() || jPasswordField1.getText().trim().isEmpty()))||(!jRadioButton3.isSelected() && !jRadioButton4.isSelected() && !jRadioButton5.isSelected())){
+        JOptionPane.showMessageDialog(null,"Enter all the info", "Warning" , JOptionPane.PLAIN_MESSAGE);
+        }
+        else{
+         File fl=new File("ASYI RESTAURANT.txt");
+                FileWriter fr = null;
+		BufferedWriter br = null;
+		PrintWriter pr = null;
+      
+      String input = jTextArea1.getText();
+      
+      //exception implementation
+		try {
+			// to append to file, you need to initialize FileWriter using below constructor
+			fr = new FileWriter(fl, true);
+			br = new BufferedWriter(fr);
+			pr = new PrintWriter(br);
+			pr.println(input);
+		} catch ( Exception f1 ) {			
+         jTextArea1.setText(evt.toString());
+		} finally {
+			try {
+				pr.close();
+				br.close();
+				fr.close();
+                                  JOptionPane.showMessageDialog(null,"File Written Succesfully!");
+			} catch (Exception f1) {
+				 jTextArea1.setText(evt.toString());
+			}
+		}
+
+        }  
+    }                                          
+    //dine in
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+        jLabel4.setVisible(false);
+        jLabel3.setVisible(true);
+    }                                             
+    //take away
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+        jLabel4.setVisible(true);
+        jLabel3.setVisible(false);
+    }                                             
+   
+    //calculate total price
+    TotalPrice tp=new TotalPrice();
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here: 
+       
+         try{ //exceptionhandling
+          int a1=Integer.parseInt(jTextField2.getText());
+          tp.a=a1;
+          int b1=Integer.parseInt(jTextField3.getText());
+          tp.b=b1;
+          int c1=Integer.parseInt(jTextField4.getText());
+          tp.c=c1;
+          int d1=Integer.parseInt(jTextField5.getText());
+          tp.d=d1;
+          int e1=Integer.parseInt(jTextField6.getText());
+          tp.e=e1; 
+          jTextField7.setText(String.valueOf(tp.getTotalPrice()));
+          }
+         catch(NumberFormatException tp){
+                 JOptionPane.showMessageDialog(null,"You have entered invalid input", "Warning", JOptionPane.PLAIN_MESSAGE);
+                 }
+        
+        
+        
+        
+    }     
+    
+    
+    //cash
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        jCheckBox2.setVisible(false);
+        jLabel19.setVisible(true);
+        jLabel20.setVisible(true);
+        jTextField8.setVisible(true);
+        jTextField9.setVisible(true);
+    }                                          
+     
+    //card
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+         jCheckBox1.setVisible(false);
+         jLabel21.setVisible(true);
+         jLabel22.setVisible(true);
+         jTextField10.setVisible(true);
+        jPasswordField1.setVisible(true);
+
+        
+        
+    }                                          
+    // display output
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+         if(jTextField1.getText().trim().isEmpty() ||jTextField2.getText().trim().isEmpty()|| jTextField3.getText().trim().isEmpty()||jTextField4.getText().trim().isEmpty()|| jTextField5.getText().trim().isEmpty()||jTextField6.getText().trim().isEmpty()||(!jRadioButton1.isSelected() && !jRadioButton2.isSelected())||(!jCheckBox1.isSelected() && !jCheckBox2.isSelected())
+         || jTextField7.getText().trim().isEmpty()||((jTextField8.getText().trim().isEmpty() || jTextField9.getText().trim().isEmpty())&& (jTextField10.getText().trim().isEmpty() || jPasswordField1.getText().trim().isEmpty()))||(!jRadioButton3.isSelected() && !jRadioButton4.isSelected() && !jRadioButton5.isSelected())){  
+         JOptionPane.showMessageDialog(null,"Enter all the info", "Warning" , JOptionPane.PLAIN_MESSAGE);
+     }
+     else{
+         jTextArea1.append(jLabel1.getText()+"\n");
+         jTextArea1.append(jLabel2.getText() + jTextField1.getText()+"\n");//display name
+       
+       //display dine in or take away
+        if(jRadioButton1.isSelected()){
+           jTextArea1.append(jRadioButton1.getText()+"\n");
+           jTextArea1.append(jLabel3.getText()+"\n");
+        }
+        if(jRadioButton2.isSelected()){
+            jTextArea1.append(jRadioButton2.getText()+"\n");
+            jTextArea1.append(jLabel4.getText()+"\n");
+        }
+       //display order
+            jTextArea1.append(jLabel5.getText() +"\t\t" + jLabel6.getText()  +"\t" + jLabel7.getText()+"\n");
+            jTextArea1.append(jLabel8.getText() +"\t\t" + jLabel9.getText() +"\t" + jTextField2.getText() +"\n");
+            jTextArea1.append(jLabel10.getText()+"\t\t" + jLabel11.getText() +"\t" + jTextField3.getText() +"\n");
+            jTextArea1.append(jLabel12.getText()+"\t\t" + jLabel13.getText() +"\t" +  jTextField4.getText() +"\n");
+            jTextArea1.append(jLabel14.getText()+"\t\t" + jLabel15.getText() +"\t" +  jTextField5.getText() +"\n");
+            jTextArea1.append(jLabel16.getText()+"\t\t" + jLabel17.getText() +"\t" +  jTextField6.getText() +"\n");
+       //display total price
+            jTextArea1.append(jLabel18.getText()+"\n");
+            jTextArea1.append(jTextField7.getText()+"\n");
+       //dislpay cash and debit card
+        if(jCheckBox1.isSelected()){
+            jTextArea1.append(jCheckBox1.getText()+"\n");
+            jTextArea1.append(jLabel19.getText()+"\n" ); 
+            jTextArea1.append(jTextField8.getText()+"\n");
+            jTextArea1.append(jLabel20.getText()+"\n");
+            jTextArea1.append(jTextField9.getText()+"\n");
+     
+        }
+        if(jCheckBox2.isSelected()){
+            jTextArea1.append(jCheckBox2.getText()+ "\n");
+            jTextArea1.append(jLabel21.getText()+"\n");
+            jTextArea1.append(jTextField10.getText()+"\n");
+            jTextArea1.append(jLabel22.getText()+"\n");
+            jTextArea1.append(jPasswordField1.getPassword()+"\n");
+         
+        }
+            jTextArea1.append("Thank You.Please Come again.\n");
+            jTextArea1.append("Feedback:\n");
+            if(jRadioButton3.isSelected()){
+            jTextArea1.append(cm.comment1());    
+            }    
+            if(jRadioButton4.isSelected()){
+            jTextArea1.append(cm.comment2());    
+        }
+            if(jRadioButton5.isSelected()){
+            jTextArea1.append(cm.comment3());    
+        }    
+        }   
+    }                                        
+    //clear
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+               ButtonGroup bt=new ButtonGroup();
+               bt.add(jRadioButton2);
+               bt.add(jRadioButton1);
+               ButtonGroup bt1=new ButtonGroup();
+               bt1.add(jRadioButton3);
+               bt1.add(jRadioButton4);
+               bt1.add(jRadioButton5);
+               
+         jTextField1.setText("");
+         bt.clearSelection();
+         bt1.clearSelection();
+         jLabel3.setVisible(false);
+         jLabel3.setText("No of Table :" + String.valueOf(to.NoTable()));
+         jLabel4.setVisible(false);
+         jLabel4.setText("Turn : "+ String.valueOf(to.NoOfTurn()));
+         jTextField2.setText("");
+         jTextField3.setText(""); 
+         jTextField4.setText("");
+         jTextField5.setText("");
+         jTextField6.setText("");
+         jCheckBox1.setSelected(false);
+         jCheckBox1.setVisible(true);
+         jLabel19.setVisible(false);
+         jTextField8.setText("");
+         jLabel20.setVisible(false);
+         jTextField9.setText("");
+         jCheckBox2.setSelected(false);
+         jCheckBox2.setVisible(true);
+         jLabel21.setVisible(false);
+         jTextField10.setText("");
+         jLabel22.setVisible(false);
+         jPasswordField1.setText("");
+         jTextArea1.setText("");
+         jTextField7.setText("");
+         jTextField8.setVisible(false);
+         jTextField9.setVisible(false);
+         jTextField10.setVisible(false);
+         jPasswordField1.setVisible(false);
+    }                                        
+                                              
+     
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    try{
+        if(Double.parseDouble(jTextField8.getText())>=Double.parseDouble(jTextField7.getText())){
+        double balance=Double.parseDouble(jTextField8.getText())-Double.parseDouble(jTextField7.getText());
+        jTextField9.setText(String.valueOf(balance));
+        }else{
+        JOptionPane.showMessageDialog(null,"The cash is not enough!", "Warning", JOptionPane.PLAIN_MESSAGE);
+        }
+      }
+      catch(NumberFormatException jTextField9){
+                 JOptionPane.showMessageDialog(null,"You have entered invalid input", "Warning", JOptionPane.PLAIN_MESSAGE);
+                 }
+    
+    }    
+     private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    try{
+         no.cardValidateMember( jTextField10.getText());
+      }
+      catch(NumberFormatException jTextField10){
+                 JOptionPane.showMessageDialog(null,"You have entered invalid input", "Warning", JOptionPane.PLAIN_MESSAGE);
+                 }
+    }    
+    
+     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    
+     if(jPasswordField1.getPassword().length < 6 || jPasswordField1.getPassword().length > 6){
+        JOptionPane.showMessageDialog(null,"Invalid Password", "Warning" , JOptionPane.PLAIN_MESSAGE);
+      }
+
+    else
+      {
+      JOptionPane.showMessageDialog(null,"Transaction is Success! ", "Status" , JOptionPane.PLAIN_MESSAGE);
+      }
+     
+     
+     }    
+    
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("FlatLaf Light".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Order().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JLabel jLabel23;
+     private javax.swing.JPasswordField jPasswordField1;
+    // End of variables declaration                   
+
+}
